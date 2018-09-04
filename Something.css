@@ -23,11 +23,11 @@ body{
 
   /*Header**/
   header{
-      background:#ff3835;
+      background:#818287;
       color:#ffffff;
       padding-top:30px;
       min-height:70px;
-      border-bottom:#e8491d 3px solid;
+      border-bottom:#b30003 5px solid;
   }
   
   header a{
@@ -45,6 +45,7 @@ body{
   
   header #branding{
       float:left;
+      margin-left:40 
   }
   
   header #branding h1{
@@ -54,4 +55,13 @@ body{
   header nav{
       float:right;
       margin-top:10px;
+  }
+  
+  header .highlight, header .current a{
+      color:#b30003;
+      font-weight:bold;
+  }
+  
+  header a:hover{
+      color:#cccccc;
   }
