@@ -64,4 +64,23 @@ body{
   
   header a:hover{
       color:#cccccc;
+      font-weight:bold;
   }
+  
+  /* Showcase */
+  #showcase{
+      min-height: 400px;
+      background:url('./pictures/background2.jpg');
+      text-align: center;
+      color:#ffffff;
+  }
+ 
+ #showcase h1{
+     margin-top:0px;
+     font-size:55px;
+     margin-bottom: 10px;
+ }
+  
+ #showcase p{
+     font-size: 20px;
+ }
