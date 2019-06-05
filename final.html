@@ -1,0 +1,125 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="js/processing.js"></script>
+</head>
+
+<body>
+<script type="text/processing">
+
+int x;                      //Position of the ball
+int wy[] = new int[2];
+int y;
+int speed=1;                   //Speed of hte ball?
+int highScore = 0;            //The highschore
+int XDirection=1;                    //what direction is the ball going?
+int score=0;                   //Starting score
+int wx[] = new int[2];            // Setup
+int lives=5;                   //Number of lives left to start
+boolean lost=false;            //checks if you lost?
+
+void setup()                   //first thing to run
+{
+  size (400,400);
+  smooth();
+  x=width/2;                //Puts the ball in the middle
+  fill(0,191,255);               //changes the color of the ball and background
+  textSize(13);                //Size of the text 
+}
+
+void draw()                                      // Keeps the game running
+{
+  background (123);                                //makes the bcakgroud black
+  ellipse(x, height/2,40,40);                 //creates teh ball
+  x=x+(speed*XDirection);                        //Constantly updates the balls position DON'T MESS WITH THE FREAKING SPEED RIGHT OFF THE GATE FOOL! ITS TOO FAST
+  if (x > width-20 || x<20)                //Checks to see if the ball has hit the edge of the wall
+  {
+    XDirection=-XDirection;                                  //Checks if it reverses
+  }
+  text("score = "+score,10,10);                  //Displays the score
+  text("lives = "+lives,width-80,10);            //Shows how many lives are left
+  if (lives<=0)                                  //Constantly checks to see if you've lost or not
+  {
+    makeButton();
+    lost = true;
+  }
+         
+  for(int i = 0 ; i < 2; i++) {
+  if(wx[i] == width/2) highScore = max(++score, highScore);
+      if(y>height||y<0||(abs(width/2-wx[i])<25 && abs(y-wy[i])>100));
+      wx[i] -= 6;
+    }
+   if(lives ==0)                                // If your score is greater than the highScore then highScore will change. However if you don't score hgiher then it just wont change.
+   {
+     if(score > highScore)
+     {
+     highScore = score;                          //Sets highScore = to score
+     }
+ }
+   
+    text(""+score, width/2-15, 700);
+    
+  
+    imageMode(CENTER);
+    
+    text("High Score: "+highScore, 150, 10);
+  }
+
+
+void restart()                                                                                   // Restores the text to the orginal size  
+{  
+  textSize(13);  
+}
+
+void makeButton(){                                                             // Creates the button 
+fill(255);
+if(mouseX > 200 && mouseX < 400 && mouseY > 200 && mouseY < 250){
+fill(120); 
+}
+rect(50,200, 300, 50, 15); 
+fill(255,0,0);
+
+if(mouseX > 50 && mouseX < 200 && mouseY > 200 && mouseY < 250){          // Postion of mouse
+fill(0,0,255); //Change to BLUE IF Mouse X and MouseY are in RECT
+if(mousePressed){  
+  restart();
+//WHEN CLICKED MAKES THE TEXT SIZE BIGGER
+}
+}
+text("PLAY AGAIN?", 130, 240, 410);
+}
+
+void mousePressed()                              //If the mouse is pressed this function will run
+{
+  if (dist(mouseX, mouseY, x, 200)<=20)      //Checks the position of the click 
+  {
+    score=score+speed;                           //Increases  speed
+    speed=speed+1;                               //Increases score
+  }
+  else                                           //If we miss
+  {
+    if (speed<1)                                 //If the speed is more than 1 it will decrease
+    {
+    speed=speed-1;
+    }
+    lives=lives-1;                               //Takes a life away
+  }
+  if (lost==true)                                //If the game is lost it will restart 
+  {
+    speed=1;                                     //Reset all of the conditions
+    lives=5;
+    score=0;
+    fill(0,191,255); 
+    textSize(13);
+    x=width/2;
+    XDirection=1;
+    lost=false;
+    loop();                                     //Starts at the original loop again
+  }
+}
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
